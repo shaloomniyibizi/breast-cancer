@@ -1,162 +1,337 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/style.css"> 
-     <!-- add icon link -->
-     <link rel = "icon" type = "image/x-icon" href ="static/logo_tr.png">  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" type="text/css" href="static/style.css" /> -->
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='dist/css/output.css')}}"
+    />
+    <!-- add icon link -->
+    <link rel="icon" type="image/x-icon" href="static/logo_tr.png" />
     <title>Breast Cancer Prediction Model</title>
-    <meta charset="utf-8" name="viewport" 
-    content= "width=device-width, initial-scale=1.0">
-    <!-- <style>
-      div {
-        background-image: url('static/bg.png');
-      }
-      </style> -->
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <script src="static/dist/js/main.js"></script>
   </head>
-  
-  <body>
-    <div class="container_main">
-      <div class="sub_container" id="holder">
-          <table>
-            <tr><td><IMG SRC="static/logo_tr.png" ALT="tries" WIDTH=185 HEIGHT=129></td>
-            <td><center><h1 class='main_heading'>Breast Cancer Prediction Model</h1></center></td>
-          </tr>
-        </table>
-        <hr style="height:3px;border-width:0;color:gray;background-color:gray">
-        <p>Logistic Regression model is developed based on 10 features that classify whether the breast cancer is benign or malignant.For classifying the patient, users are requested to submit their data on this following form as per the value range provided in the input placeholder.
-        <b>[Note: For predicted value, please check the footer of the table.]</b></p>
-        <table class="t1">
-        <form class="form-horizontal" action="{{ url_for('predict')}}" method="post">
-          <div class="form-group">
-            <div class="col-sm-10">
-                <thead>
-                  <tr><th colspan="2"><b><h4>Submission Form </h4></b></th></tr>
-                </thead>
-                <tfoot>
-                  <tr><th colspan="2"><center><b><h4>{{ prediction_text}}</h4></b></center></th></tr>
-                </tfoot>
-                 <tr><td><label for = "texture_mean">Texture Mean:</label></td>
-                  <td>          
-                    <span>
-                      <input  class="form-control" type= "text" name="texture_mean" placeholder="Value range: 9.71 - 39.28" required="required" />
-                    </span>
-                </td></tr>
+  <body class="p-0 m-0">
+    <nav
+      class="bg-white dark:bg-gray-900 w-full z-20 border-b border-gray-200 dark:border-gray-600"
+    >
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4"
+      >
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="../static/Blue_Logo_CHUB.png" class="h-8" alt="chub Logo" />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+          ></span>
+        </a>
+        <div class="flex order-2 space-x-0 rtl:space-x-reverse">
+          <a
+            href="#"
+            class="px-4 py-1 my-2 rounded-lg text-white hover:text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >Get started</a
+          >
+        </div>
+        <div class="items-center justify-between flex w-auto order-1">
+          <ul
+            class="flex font-medium border-gray-100 rounded-lg space-x-8 rtl:space-x-reverse flex-row mt-0 border-0 bg-white dark:bg-gray-800 dark:border-gray-700"
+          >
+            <li>
+              <a href="#" class="block p-2 text-neutral-950" aria-current="page"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block p-2 text-neutral-950" aria-current="page"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block p-2 text-neutral-950" aria-current="page"
+                >Contact</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
-     
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "area_mean">Area Mean:</label></td>
-            <td>
-          <span><input  class="form-control" type="text" name="area_mean" placeholder="Value range: 143.50 - 2501.00" required="required" /></span>
-          </td></tr>
+    </nav>
+    <div class="mx-auto px-16 py-4">
+      <div class="flex gap-8">
+        <div class="w-full">
+          <p>
+            Logistic Regression and random forest classfier model are developed based on 10 features that
+            classify whether the breast cancer is benign or malignant.For
+            classifying the patient, users are requested to submit their data on
+            this following form as per the value range provided in the input
+            placeholder.
+            >
+          </p>
+          <div class="grid grid-cols-1 grid-rows-1 md:grid-cols-2 mt-8">
+            <div
+              class="block max-w-[18rem] rounded-lg bg-primary shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+            >
+              <div
+                class="border-b-2 border-[#0000002d] px-6 py-3  dark:text-neutral-50 uppercase bg-green-100 text-green-700"
+              >
+                width Logistic Regression
+              </div>
+              <div class="p-6 flex justify-between items-center">
+                <h5
+                  class="mb-2 text-xl font-medium leading-tight  dark:text-neutral-50"
+                >
+                  Probability : 
+                </h5>
+                <p class="text-base  dark:text-neutral-50">
+                  <h4 class="text-green-800"> {{ y_prob1}}%</h4>
+                </p>
+              </div>
+              <div class="p-6 flex justify-between items-center">
+                <h5
+                  class="mb-2 text-xl font-medium leading-tight  dark:text-neutral-50"
+                >
+                  Accuracy: 
+                </h5>
+                <p class="text-base  dark:text-neutral-50">
+                  <h4 class="text-green-800">{{ accuracy1}}%</h4>
+                </p>
+              </div>
+            </div>
+            <div
+              class="block max-w-[18rem] rounded-lg bg-primary shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+            >
+              <div
+                class="border-b-2 border-[#0000002d] px-6 py-3  dark:text-neutral-50 uppercase bg-yellow-100 text-yellow-700"
+              >
+                RandomForestClassifier
+              </div>
+              <div class="p-6 flex justify-between items-center">
+                <h5
+                  class="mb-2 text-xl font-medium leading-tight  dark:text-neutral-50"
+                >
+                  Probability : 
+                </h5>
+                <p class="text-base  dark:text-neutral-50">
+                  <h4 class="text-green-800"> {{ y_prob2}}%</h4>
+                </p>
+              </div>
+              <div class="p-6 flex justify-between items-center">
+                <h5
+                  class="mb-2 text-xl font-medium leading-tight  dark:text-neutral-50"
+                >
+                  Accuracy: 
+                </h5>
+                <p class="text-base text-white dark:text-neutral-50">
+                  <h4 class="text-green-800">{{ accuracy2}}%</h4>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="my-4 rounded-lg bg-green-100 px-6 py-2 text-base text-green-700 shadow-md"
+            role="alert">
+            <h4 class="mb-2 text-lg font-medium leading-tight">BY USING RANDOM FOREST CLASSFIER:</h4>
+            <p class="mb-1">
+              {{ans2}}
+            </p>
+          </div>
+          <div
+            class="mb-4 rounded-lg bg-yellow-100 px-6 py-2 text-base text-yellow-700 shadow-md"
+            role="alert">
+            <h4 class=" text-lg font-medium leading-tight">BY USING LOGISTIC REGRESSION: </h4>
+            <p class="mb-1">
+              {{ans1}}
+            </p>
+          </div>
         </div>
-      </div>
 
-      
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "concavity_mean">Concavity Mean:</label></td>
-            <td>
-          <span>
-          <input  class="form-control" type="text" name="concavity_mean" placeholder="Value range: 0.00 - 0.43" required="required" />
-        </span>
-      </td></tr>
+        <div
+          id="progress-modal"
+          tabindex="-1"
+          aria-hidden="true"
+          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        >
+        
         </div>
+        <form
+          class="min-w-max w-full shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-4 rounded-md"
+          action="{{ url_for('predict')}}"
+          method="post"
+        >
+          <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div>
+              <label
+                for="texture_mean"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >texture_mean</label
+              >
+              <input
+                type="text"
+                name="texture_mean"
+                placeholder="Value range: 9.71 - 39.28"
+                id="texture_mean"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="John"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="area_mean"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >area_mean</label
+              >
+              <input
+                type="text"
+                name="area_mean"
+                placeholder="Value range: 143.50 - 2501.00"
+                id="area_mean"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Doe"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="concavity_mean"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >concavity_mean</label
+              >
+              <input
+                type="text"
+                name="concavity_mean"
+                placeholder="Value range: 0.00 - 0.43"
+                id="concavity_mean"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Flowbite"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="area_se"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >area_se</label
+              >
+              <input
+                type="text"
+                name="area_se"
+                placeholder="Value range: 6.80 - 542.20"
+                id="area_se"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="123-45-678"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="concavity_se"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >concavity_se</label
+              >
+              <input
+                type="text"
+                name="concavity_se"
+                placeholder="Value range: 0.00 - 0.40"
+                id="concavity_se"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="flowbite.com"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="fractal_dimension_se"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >fractal_dimension_se</label
+              >
+              <input
+                type="text"
+                name="fractal_dimension_se"
+                placeholder="Value range: 0.00 - 0.03"
+                id="fractal_dimension_se"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="smoothness_worst"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >smoothness_worst</label
+              >
+              <input
+                type="text"
+                name="smoothness_worst"
+                placeholder="Value range: 0.07 - 0.22"
+                id="smoothness_worst"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="flowbite.com"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="concavity_worst"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >concavity_worst</label
+              >
+              <input
+                type="text"
+                name="concavity_worst"
+                placeholder="Value range: 0.00 - 1.25"
+                id="concavity_worst"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="symmetry_worst"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >symmetry_worst</label
+              >
+              <input
+                type="text"
+                name="symmetry_worst"
+                placeholder="Value range: 0.16 - 0.66"
+                id="symmetry_worst"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="flowbite.com"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="concavity_worst"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >concavity_worst</label
+              >
+              <input
+                type="text"
+                name="fractal_dimension_worst"
+                placeholder="Value range: 0.06 - 0.21"
+                id="concavity_worst"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+                required
+              />
+            </div>
+          </div>
+          <input
+            value="PREDICT"
+            type="submit"
+            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          />
+        </form>
       </div>
-      
-      <div class="form-group">
-        <div class="col-sm-10">
-        <tr><td><label for = "area_se">Area SE:</label></td>
-          <td>
-          <span>
-          <input  class="form-control" type="text" name="area_se" placeholder="Value range: 6.80 - 542.20" required="required" />
-          </span>
-        </td></tr>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "concavity_se">Concavity SE:</label></td>
-          <td>
-          <span>
-          <input  class="form-control" type="text" name="concavity_se" placeholder="Value range: 0.00 - 0.40" required="required" />
-          </span>
-        </td></tr>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "fractal_dimension_se">Fractal Dimension SE:</label></td>
-            <td>
-          <span>
-          <input  class="form-control" type="text" name="fractal_dimension_se" placeholder="Value range: 0.00 - 0.03" required="required" />
-          </span>
-        </td></tr>
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "smoothness_worst">Smoothness Worst:</label></td>
-            <td>
-          <span>
-          <input  class="form-control" type="text" name="smoothness_worst" placeholder="Value range: 0.07 - 0.22" required="required" />
-          </span>
-        </td></tr>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "concavity_worst">Concavity Worst:</label></td>
-          <td>
-          <span>
-          <input  class="form-control" type="text" name="concavity_worst" placeholder="Value range: 0.00 - 1.25" required="required" />
-          </span>
-        </td></tr>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "symmetry_worst">Symmetry Worst:</label></td>
-            <td>
-          <span>
-          <input  class="form-control" type="text" name="symmetry_worst" placeholder="Value range: 0.16 - 0.66" required="required" />
-          </span>
-        </td></tr>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-10">
-          <tr><td><label for = "fractal_dimension_worst">Fractal Dimension Worst:</label></td>
-            <td>
-          <span>
-          <input  class="form-control" type="text" name="fractal_dimension_worst" placeholder="Value range: 0.06 - 0.21" size="5" required="required"/>
-          </span>
-        </td></tr>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-         <tr><td colspan="2"><button type="submit" class="btnsub">PREDICT</button></td></tr>
-        </div>
-      </div>
-    </form>
-    <h2 class="result"></h2>
-  </div>
-  </div>
-  </table>
+    </div>
   </body>
 </html>
-
